@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bro Mow — Heritage Hills, Lone Tree CO</title>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green:      #2d6a2d;
+    --green-mid:  #3d8b3d;
+    --lime:       #8bc34a;
+    --lime-bright:#c6ef4f;
+    --cream:      #f7f4ee;
+    --brown:      #5c3d1e;
+    --soil:       #8b6340;
+    --white:      #ffffff;
+    --dark:       #1a2e1a;
+    --gray:       #7a8c7a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 2.5rem;
+    background: rgba(247,244,238,0.93);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid rgba(45,106,45,0.12);
+  }
+  .nav-logo {
+    font-family: 'Righteous', sans-serif;
+    font-size: 1.5rem; letter-spacing: 0.04em;
+    color: var(--green); text-decoration: none;
+  }
+  .nav-logo span { color: var(--lime); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gray); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center;
+    padding: 7rem 2.5rem 4rem;
+  }
+
+  /* grass texture strips */
+  .grass-strip {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 120px;
+    background: var(--green);
+    clip-path: polygon(0 40%, 3% 20%, 6% 40%, 9% 15%, 12% 38%, 15% 22%, 18% 42%, 21% 18%, 24% 40%, 27% 25%, 30% 44%, 33% 20%, 36% 38%, 39% 15%, 42% 40%, 45% 22%, 48% 42%, 51% 18%, 54% 38%, 57% 25%, 60% 44%, 63% 20%, 66% 40%, 69% 28%, 72% 44%, 75% 22%, 78% 40%, 81% 18%, 84% 38%, 87% 25%, 90% 42%, 93% 20%, 96% 40%, 100% 28%, 100% 100%, 0 100%);
+  }
+  .grass-strip-2 {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 80px;
+    background: var(--green-mid);
+    clip-path: polygon(0 55%, 4% 30%, 8% 55%, 12% 28%, 16% 52%, 20% 32%, 24% 55%, 28% 25%, 32% 50%, 36% 30%, 40% 55%, 44% 28%, 48% 52%, 52% 32%, 56% 55%, 60% 25%, 64% 50%, 68% 30%, 72% 55%, 76% 28%, 80% 52%, 84% 32%, 88% 55%, 92% 25%, 96% 50%, 100% 35%, 100% 100%, 0 100%);
+  }
+
+  /* circle deco */
+  .hero-circle {
+    position: absolute; right: -100px; top: 50%;
+    transform: translateY(-50%);
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(45,106,45,0.3) 0%, transparent 70%);
+  }
+  .hero-circle-2 {
+    position: absolute; right: 80px; top: 50%;
+    transform: translateY(-50%);
+    width: 380px; height: 380px; border-radius: 50%;
+    border: 2px solid rgba(139,195,74,0.2);
+  }
+
+  .hero-inner { position: relative; z-index: 2; max-width: 700px; }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(139,195,74,0.15); border: 1px solid rgba(139,195,74,0.35);
+    color: var(--lime); font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 100px; margin-bottom: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  h1 {
+    font-family: 'Righteous', sans-serif;
+    font-size: clamp(4.5rem, 11vw, 8.5rem);
+    line-height: 0.9; letter-spacing: 0.02em;
+    color: var(--white);
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  h1 .mow { color: var(--lime-bright); }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    font-weight: 500; color: rgba(255,255,255,0.6);
+    margin: 1.5rem 0 2.5rem; line-height: 1.5;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-tagline strong { color: var(--lime); }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--lime); color: var(--dark);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 0.9rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 1rem 2.2rem; border-radius: 100px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 24px rgba(139,195,74,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,195,74,0.55); }
+  .btn-secondary {
+    border: 2px solid rgba(255,255,255,0.2); color: var(--white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700; font-size: 0.9rem; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none;
+    padding: 1rem 2.2rem; border-radius: 100px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+
+  .hero-location {
+    margin-top: 2.5rem; font-size: 0.82rem; color: rgba(255,255,255,0.4);
+    display: flex; align-items: center; gap: 0.4rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+  }
+
+  /* ── SHARED ── */
+  section { padding: 5.5rem 2.5rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--lime); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Righteous', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    color: var(--dark); margin-bottom: 1rem; line-height: 1.05;
+  }
+  .section-sub { color: var(--gray); font-size: 1rem; max-width: 520px; margin-bottom: 3rem; line-height: 1.7; }
+
+  /* ── SERVICES ── */
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+  }
+  .svc-card {
+    background: var(--cream);
+    border: 2px solid transparent;
+    border-radius: 16px; padding: 2rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .svc-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--green), var(--lime));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+  .svc-card:hover { border-color: rgba(45,106,45,0.15); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.08); }
+  .svc-card:hover::before { transform: scaleX(1); }
+  .svc-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+  .svc-name {
+    font-family: 'Righteous', sans-serif;
+    font-size: 1.2rem; color: var(--dark); margin-bottom: 0.5rem;
+  }
+  .svc-desc { color: var(--gray); font-size: 0.88rem; line-height: 1.65; margin-bottom: 1.2rem; }
+  .svc-price { font-weight: 800; font-size: 1.4rem; color: var(--green); }
+  .svc-price span { font-size: 0.82rem; font-weight: 500; color: var(--gray); }
+
+  /* ── WHY ── */
+  #why { background: var(--dark); }
+  #why .section-title { color: var(--white); }
+  #why .section-sub { color: rgba(255,255,255,0.5); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+  }
+  .why-item { display: flex; flex-direction: column; gap: 0.8rem; }
+  .why-num {
+    font-family: 'Righteous', sans-serif;
+    font-size: 3rem; color: rgba(139,195,74,0.2);
+    line-height: 1;
+  }
+  .why-title { font-weight: 800; font-size: 1rem; color: var(--white); }
+  .why-desc { font-size: 0.88rem; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+  .bros-banner {
+    margin-top: 4rem;
+    background: var(--green);
+    border-radius: 16px; padding: 2.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .bros-banner p {
+    font-family: 'Righteous', sans-serif;
+    font-size: clamp(1.3rem, 3vw, 2rem);
+    color: var(--white); line-height: 1.3; max-width: 480px;
+  }
+  .bros-banner p span { color: var(--lime-bright); }
+  .bros-tag {
+    background: var(--lime-bright); color: var(--dark);
+    font-weight: 800; font-size: 0.85rem; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 0.75rem 1.5rem; border-radius: 100px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--cream); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+  .contact-item { display: flex; align-items: flex-start; gap: 1rem; }
+  .c-icon {
+    width: 48px; height: 48px; border-radius: 12px; flex-shrink: 0;
+    background: var(--green); color: var(--white);
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .c-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gray); }
+  .c-value { font-size: 1rem; font-weight: 700; color: var(--dark); margin-top: 0.2rem; }
+  .c-note { font-size: 0.78rem; color: var(--lime); font-weight: 600; margin-top: 0.1rem; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+  label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); display: block; margin-bottom: 0.35rem; }
+  input, textarea, select {
+    width: 100%; background: var(--white);
+    border: 2px solid rgba(45,106,45,0.15); border-radius: 10px;
+    color: var(--dark); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.95rem;
+    padding: 0.8rem 1rem; outline: none; transition: border-color 0.2s;
+  }
+  input:focus, textarea:focus, select:focus { border-color: var(--green); }
+  textarea { resize: vertical; min-height: 110px; }
+  .form-submit {
+    background: var(--green); color: var(--white);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 0.95rem; letter-spacing: 0.06em;
+    text-transform: uppercase; border: none; cursor: pointer;
+    padding: 1rem 2rem; border-radius: 100px;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 20px rgba(45,106,45,0.3);
+    align-self: flex-start;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(45,106,45,0.45); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark); padding: 2rem 2.5rem;
+    text-align: center; border-top: 1px solid rgba(139,195,74,0.1);
+  }
+  footer p { color: rgba(255,255,255,0.4); font-size: 0.82rem; }
+  footer strong { color: var(--lime); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><span>Bro</span> Mow</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-circle"></div>
+  <div class="hero-circle-2"></div>
+  <div class="grass-strip"></div>
+  <div class="grass-strip-2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge">📍 Heritage Hills · Lone Tree, CO</div>
+    <h1>Bro<br><span class="mow">Mow</span></h1>
+    <p class="hero-tagline"><strong>Two brothers. One great yard.</strong><br>Lawn mowing, landscaping & yard work done right — by your neighbors.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#services" class="btn-secondary">Our Services</a>
+    </div>
+    <p class="hero-location">📍 Lone Tree, CO · Reliable · Local · Affordable</p>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-label reveal">What We Do</p>
+    <h2 class="section-title reveal">Services & Pricing</h2>
+    <p class="section-sub reveal">Honest prices. Hard work. No shortcuts. Here's what we offer — free quotes always available for bigger jobs.</p>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <span class="svc-icon">🌿</span>
+        <div class="svc-name">Lawn Mowing</div>
+        <p class="svc-desc">Clean, even cuts every time. We edge, mow, and blow off clippings so your lawn looks sharp from the street.</p>
+        <div class="svc-price">$30–$60 <span>/ yard</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-icon">🌱</span>
+        <div class="svc-name">Weeding</div>
+        <p class="svc-desc">Flower beds, rock areas, walkways — cleared out and tidy. We get the roots, not just the tops.</p>
+        <div class="svc-price">Free Quote <span>/ by job</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-icon">🪨</span>
+        <div class="svc-name">Mulching</div>
+        <p class="svc-desc">Fresh mulch spread neatly in your beds. Priced by job size — contact us for a free quote.</p>
+        <div class="svc-price">Free Quote <span>/ by size</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-icon">🍂</span>
+        <div class="svc-name">Yard Cleanup</div>
+        <p class="svc-desc">Leaves, debris, clippings — hauled away and cleaned up. Contact us for a quote based on your yard.</p>
+        <div class="svc-price">Free Quote <span>/ by size</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-icon">✂️</span>
+        <div class="svc-name">Landscaping</div>
+        <p class="svc-desc">Trimming, shaping, edging, and general landscaping to keep your property looking its best all season.</p>
+        <div class="svc-price">Free Quote <span>/ by job</span></div>
+      </div>
+      <div class="svc-card reveal">
+        <span class="svc-icon">🔧</span>
+        <div class="svc-name">Odds & Ends</div>
+        <p class="svc-desc">Got a random job that doesn't fit neatly in a category? Ask us — two motivated brothers can figure most things out.</p>
+        <div class="svc-price">Just Ask! <span>/ free quote</span></div>
+      </div>
+    </div>
+    <p style="color:var(--gray);font-size:0.82rem;margin-top:1.25rem;font-style:italic;">* All prices subject to change based on job size or difficulty.</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="section-inner">
+    <p class="section-label reveal">Why Bro Mow</p>
+    <h2 class="section-title reveal">Why Hire Us?</h2>
+    <p class="section-sub reveal">We're not a faceless company. We're two brothers from your neighborhood who take pride in every yard we touch.</p>
+    <div class="why-grid">
+      <div class="why-item reveal">
+        <div class="why-num">01</div>
+        <div class="why-title">Your Actual Neighbors</div>
+        <p class="why-desc">We live right here in Lone Tree. When you hire us, you're keeping money in the neighborhood and backing two local teens with a real work ethic.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">02</div>
+        <div class="why-title">Reliable Every Time</div>
+        <p class="why-desc">We show up when we say we will. If something changes, we'll let you know ahead of time — no ghosting, no excuses.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">03</div>
+        <div class="why-title">Two Sets of Hands</div>
+        <p class="why-desc">Two brothers means bigger jobs get done faster. Need a full yard overhaul? We can tackle it together and get it done right.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">04</div>
+        <div class="why-title">Fair Prices</div>
+        <p class="why-desc">We're building our reputation, not padding overhead. You get quality work at a price that actually makes sense for your neighborhood.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">05</div>
+        <div class="why-title">Satisfaction Guaranteed</div>
+        <p class="why-desc">Not happy with something? We'll make it right. Our reputation matters more than any single job.</p>
+      </div>
+      <div class="why-item reveal">
+        <div class="why-num">06</div>
+        <div class="why-title">Flexible & Easy</div>
+        <p class="why-desc">Weekends, after school, all summer — we work around your schedule. One text is all it takes to get started.</p>
+      </div>
+    </div>
+
+    <div class="bros-banner reveal">
+      <p>Two brothers. <span>Ages 16 & 17.</span> Building something real — one yard at a time.</p>
+      <div class="bros-tag">🤙 Text us today</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-label reveal">Get In Touch</p>
+    <h2 class="section-title reveal">Request a Free Quote</h2>
+    <p class="section-sub reveal">Send us a message and we'll get back to you fast. No pressure — just two brothers ready to work.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Service Area</div>
+            <div class="c-value">Heritage Hills & Lone Tree, CO</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">📱</div>
+          <div>
+            <div class="c-label">Call or Text</div>
+            <div class="c-value">720-202-7894</div>
+            <div class="c-note">Ask for Noah</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">📧</div>
+          <div>
+            <div class="c-label">Email</div>
+            <div class="c-value">nfoleyram@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="c-icon">🕐</div>
+          <div>
+            <div class="c-label">Availability</div>
+            <div class="c-value">Weekends & After School</div>
+            <div class="c-note">Available all summer starting June!</div>
+          </div>
+        </div>
+      </div>
+
+      <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div>
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label for="phone">Phone / Text</label>
+            <input type="tel" id="phone" placeholder="(720) 555-0000">
+          </div>
+        </div>
+        <div>
+          <label for="service">Service Needed</label>
+          <select id="service">
+            <option value="">— Select a service —</option>
+            <option>Lawn Mowing</option>
+            <option>Weeding</option>
+            <option>Mulching</option>
+            <option>Yard Cleanup</option>
+            <option>Landscaping</option>
+            <option>Odds & Ends</option>
+            <option>Multiple Services</option>
+            <option>Not Sure Yet</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Tell Us About the Job</label>
+          <textarea id="message" placeholder="What do you need done? Any details help — yard size, what's overgrown, how often you'd want service, etc."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send My Request →</button>
+        <div id="form-success" style="display:none;color:var(--green);font-weight:700;font-size:0.9rem;margin-top:0.5rem;">
+          ✅ Got it! We'll be in touch shortly.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong>Bro Mow</strong> · Heritage Hills, Lone Tree CO · <em>Two brothers. One great yard.</em></p>
+  <p style="margin-top:0.4rem;font-size:0.75rem;">© 2025 Bro Mow Lawn & Yard Services. Your neighborhood crew.</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 55);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+  }
+</script>
+</body>
+</html>
